@@ -2,6 +2,7 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <avr/sleep.h>
 #include <util/atomic.h>
 
 void PrepareTimer()
@@ -16,15 +17,6 @@ void PrepareTimer()
 
 void PrepareButtons()
 {
-    GICR  |= _BV(INT0);                  // enable INT0;
-//    MCUCR &= ~_BV(ISC01);
-//    MCUCR |= _BV(ISC00);
-//
-    MCUCR &= ~(_BV(ISC01) | _BV(ISC00));
-    sei();              // enable global interrupt
-
-
-
     DDRD &= ~_BV(PD2);
     PORTD |= _BV(PD2);
 
@@ -32,15 +24,50 @@ void PrepareButtons()
     PORTC |= _BV(3) | _BV(4) | _BV(5);
 }
 
+static void DoGoSleep()
+{
+    GICR  |= _BV(INT0);                  // enable INT0;
+    MCUCR &= ~(_BV(ISC01) | _BV(ISC00));
+
+    DDRD &= ~_BV(PD2);
+    PORTD |= _BV(PD2);
+
+    set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+
+    SetNumberShow(false);
+    OnPrinterTick(0);
+
+    set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+    sleep_enable();
+    sei();
+    sleep_cpu();
+    sleep_disable();
+    SetNumberShow(true);
+
+    GICR  &= ~_BV(INT0);                  // disable INT0;
+    cli();
+    PrepareTimer();
+    PrepareButtons();
+}
+
 static uint8_t g_ticks = 0;
-static uint8_t g_gpios = 0;
+static bool g_Sleep = false;
+void GoSleep()
+{
+    g_Sleep = true;
+}
 
 void MainLoop()
 {
     uint8_t cnt = 0;
     for (;;)
     {
-        bool tick = false, gpio = true;
+        if (g_Sleep)
+        {
+            DoGoSleep();
+            g_Sleep = false;
+        }
+        bool tick = false;
         ATOMIC_BLOCK(ATOMIC_FORCEON)
         {
             if (g_ticks > 0)
@@ -48,16 +75,8 @@ void MainLoop()
                 tick = true;
                 -- g_ticks;
             }
-            if (g_gpios > 0)
-            {
-                gpio = true;
-                -- g_gpios;
-            }
         }
-        if (gpio)
-        {
-            OnGpio();
-        }
+        OnGpio();
         if (tick)
         {
             OnFsmTick();
@@ -73,6 +92,4 @@ ISR(TIMER1_COMPA_vect)
 }
 
 ISR(INT0_vect)
-{
-    ++g_gpios;
-}
+{}

@@ -8,8 +8,10 @@
 #define MSECS_PER_SEC 1000
 #define DEBONCE_MSEC 100
 #define HOLD_MSEC 200
+#define SLEEP_TIMEOUT_SEC 10
 
 #define MSEC_TO_TICS(MSECS) ((MSECS)/(MSECS_PER_SEC/SECOND_DIVIDER))
+#define SEC_TO_TICS(SECS) ((SECS)*SECOND_DIVIDER)
 
 #define DEBONCE_TICS (MSEC_TO_TICS(DEBONCE_MSEC))
 #if DEBONCE_TICS <= 0
@@ -21,10 +23,11 @@
 #error Chosen hold pause too little for chosen divider
 #endif
 
-#define MASK_BTN_RUN (PINC & _BV(5))
-#define MASK_BTN_PLUS (PINC & _BV(4))
-#define MASK_BTN_MINUS (PINC & _BV(3))
-#define MASK_BTNS (PINC & (_BV(5) | _BV(4) | _BV(3)))
+#define SLEEP_TIMEOUT_TICKS (SEC_TO_TICS(SLEEP_TIMEOUT_SEC))
+
+#define MASK_BTN_RUN (!(PINC & _BV(5)))
+#define MASK_BTN_PLUS (!(PINC & _BV(4)))
+#define MASK_BTN_MINUS (!(PINC & _BV(3)))
 
 #define ALARM_PIN (_BV(4))
 
@@ -71,3 +74,5 @@ void OnButton(enum Button btn, enum ButtonAction action);
 
 void MainLoop();
 void OnPrinterTick(uint8_t cnt);
+void GoSleep();
+void SetAlarm(bool on);

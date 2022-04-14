@@ -58,6 +58,7 @@ static struct Fsm {
 };
 
 static uint16_t g_Timeout = DEFAULT_TIMEOUT;
+static uint8_t g_Ticking_counter = 0;
 
 void OnFsmTick(void)
 {
@@ -96,7 +97,7 @@ void PrepareFsm()
     ToState(STATE_IDLE);
 }
 
-static inline void SetAlarm(bool on)
+void SetAlarm(bool on)
 {
     if (on)
     {
@@ -122,10 +123,19 @@ static void Idle_OnEnter()
     SetNumberShow(true);
     SetAlarm(false);
     PutNumber(g_Timeout);
+    g_Ticking_counter = 0;
 }
 
 static void Idle_OnTick()
-{}
+{
+#if SLEEP_TIMEOUT_TICKS > 0
+    if(++g_Ticking_counter >= SLEEP_TIMEOUT_TICKS)
+    {
+        g_Ticking_counter = 0;
+        GoSleep();
+    }
+#endif
+}
 
 static void Idle_OnButton(enum Button btn, enum ButtonAction action)
 {
@@ -165,8 +175,6 @@ static void Idle_OnButton(enum Button btn, enum ButtonAction action)
         }
     }
 }
-
-static uint8_t g_Ticking_counter = 0;
 
 static void Ticking_OnEnter()
 {
