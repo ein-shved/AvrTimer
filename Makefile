@@ -6,11 +6,11 @@ TARG=timer
 CC = avr-gcc
 OBJCOPY = avr-objcopy
 
-SRCS= main.c    \
-      fsm.c     \
-      isr.c     \
-      printer.c \
-      button.c
+SRCS= sources/main.c    \
+      sources/fsm.c     \
+      sources/isr.c     \
+      sources/printer.c \
+      sources/button.c
 
 OBJS = $(SRCS:.c=.o)
 MCU=atmega8
