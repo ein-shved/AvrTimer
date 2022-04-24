@@ -1651,7 +1651,7 @@
     (uuid f3ef0f38-6c02-44eb-89f4-36c971010a05)
     (property "Reference" "D1" (id 0) (at 76.2 27.305 0))
     (property "Value" "DIODE" (id 1) (at 76.2 29.845 0))
-    (property "Footprint" "Diode_SMD:D_1210_3225Metric_Pad1.42x2.65mm_HandSolder" (id 2) (at 76.2 34.925 0)
+    (property "Footprint" "Diode_SMD:D_SOD-123F" (id 2) (at 76.2 34.925 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 76.2 34.925 0)
@@ -1666,7 +1666,7 @@
     (uuid e9eb0cf1-7cfc-481d-aede-5ccf2b2563b5)
     (property "Reference" "D2" (id 0) (at 106.68 19.685 0))
     (property "Value" "DIODE" (id 1) (at 116.84 20.955 0))
-    (property "Footprint" "Diode_SMD:D_1210_3225Metric_Pad1.42x2.65mm_HandSolder" (id 2) (at 109.22 23.495 0)
+    (property "Footprint" "Diode_SMD:D_SOD-123F" (id 2) (at 109.22 23.495 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 109.22 23.495 0)
@@ -1681,7 +1681,7 @@
     (uuid 98e49acb-d0fe-43d8-8f2f-43c384e363c5)
     (property "Reference" "D3" (id 0) (at 170.18 52.07 0))
     (property "Value" "DIODE" (id 1) (at 171.45 55.88 0))
-    (property "Footprint" "Diode_SMD:D_1210_3225Metric_Pad1.42x2.65mm_HandSolder" (id 2) (at 171.45 60.96 0)
+    (property "Footprint" "Diode_SMD:D_SOD-123F" (id 2) (at 171.45 60.96 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 171.45 60.96 0)
@@ -1912,13 +1912,13 @@
       (reference "C4") (unit 1) (value "C_Polarized") (footprint "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm")
     )
     (path "/f3ef0f38-6c02-44eb-89f4-36c971010a05"
-      (reference "D1") (unit 1) (value "DIODE") (footprint "Diode_SMD:D_1210_3225Metric_Pad1.42x2.65mm_HandSolder")
+      (reference "D1") (unit 1) (value "DIODE") (footprint "Diode_SMD:D_SOD-123F")
     )
     (path "/e9eb0cf1-7cfc-481d-aede-5ccf2b2563b5"
-      (reference "D2") (unit 1) (value "DIODE") (footprint "Diode_SMD:D_1210_3225Metric_Pad1.42x2.65mm_HandSolder")
+      (reference "D2") (unit 1) (value "DIODE") (footprint "Diode_SMD:D_SOD-123F")
     )
     (path "/98e49acb-d0fe-43d8-8f2f-43c384e363c5"
-      (reference "D3") (unit 1) (value "DIODE") (footprint "Diode_SMD:D_1210_3225Metric_Pad1.42x2.65mm_HandSolder")
+      (reference "D3") (unit 1) (value "DIODE") (footprint "Diode_SMD:D_SOD-123F")
     )
     (path "/5e68ff61-6a09-45cc-8df6-d7521682d52c"
       (reference "J1") (unit 1) (value "USB_B_Micro") (footprint "Connector_USB:USB_Micro-B_Molex_47346-0001")

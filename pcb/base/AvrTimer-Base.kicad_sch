@@ -2071,7 +2071,7 @@
     (uuid 00000000-0000-0000-0000-000062739cdf)
     (property "Reference" "D4" (id 0) (at 80.01 115.1382 0))
     (property "Value" "D" (id 1) (at 80.01 117.4496 0))
-    (property "Footprint" "Diode_SMD:D_1210_3225Metric_Pad1.42x2.65mm_HandSolder" (id 2) (at 80.01 120.65 0)
+    (property "Footprint" "Diode_SMD:D_SOD-123F" (id 2) (at 80.01 120.65 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 80.01 120.65 0)
@@ -2086,7 +2086,7 @@
     (uuid 00000000-0000-0000-0000-00006272fe3e)
     (property "Reference" "D5" (id 0) (at 80.01 125.2982 0))
     (property "Value" "D" (id 1) (at 80.01 127.6096 0))
-    (property "Footprint" "Diode_SMD:D_1210_3225Metric_Pad1.42x2.65mm_HandSolder" (id 2) (at 80.01 130.81 0)
+    (property "Footprint" "Diode_SMD:D_SOD-123F" (id 2) (at 80.01 130.81 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 80.01 130.81 0)
@@ -2101,7 +2101,7 @@
     (uuid 00000000-0000-0000-0000-00006272d335)
     (property "Reference" "D6" (id 0) (at 80.01 134.1882 0))
     (property "Value" "D" (id 1) (at 80.01 136.4996 0))
-    (property "Footprint" "Diode_SMD:D_1210_3225Metric_Pad1.42x2.65mm_HandSolder" (id 2) (at 80.01 139.7 0)
+    (property "Footprint" "Diode_SMD:D_SOD-123F" (id 2) (at 80.01 139.7 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 80.01 139.7 0)
@@ -2584,13 +2584,13 @@
       (reference "Controller1") (unit 1) (value "ATmega8-16PU") (footprint "Package_DIP:DIP-28_W7.62mm")
     )
     (path "/00000000-0000-0000-0000-000062739cdf"
-      (reference "D4") (unit 1) (value "D") (footprint "Diode_SMD:D_1210_3225Metric_Pad1.42x2.65mm_HandSolder")
+      (reference "D4") (unit 1) (value "D") (footprint "Diode_SMD:D_SOD-123F")
     )
     (path "/00000000-0000-0000-0000-00006272fe3e"
-      (reference "D5") (unit 1) (value "D") (footprint "Diode_SMD:D_1210_3225Metric_Pad1.42x2.65mm_HandSolder")
+      (reference "D5") (unit 1) (value "D") (footprint "Diode_SMD:D_SOD-123F")
     )
     (path "/00000000-0000-0000-0000-00006272d335"
-      (reference "D6") (unit 1) (value "D") (footprint "Diode_SMD:D_1210_3225Metric_Pad1.42x2.65mm_HandSolder")
+      (reference "D6") (unit 1) (value "D") (footprint "Diode_SMD:D_SOD-123F")
     )
     (path "/00000000-0000-0000-0000-00006249ae87"
       (reference "Display1") (unit 1) (value "BC56-12SRWA") (footprint "Footprints:BC56-12GWA")
