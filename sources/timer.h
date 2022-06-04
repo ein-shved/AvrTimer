@@ -25,9 +25,33 @@
 
 #define SLEEP_TIMEOUT_TICKS (SEC_TO_TICS(SLEEP_TIMEOUT_SEC))
 
-#define MASK_BTN_RUN (!(PINC & _BV(5)))
-#define MASK_BTN_PLUS (!(PINC & _BV(4)))
+#define MASK_BTN_RUN (!(PINC & _BV(4)))
+#define MASK_BTN_PLUS (!(PINC & _BV(5)))
 #define MASK_BTN_MINUS (!(PINC & _BV(3)))
+
+
+#define SEGMENT_A   _BV(6)
+#define SEGMENT_B   _BV(0)
+#define SEGMENT_C   _BV(1)
+#define SEGMENT_D   _BV(4)
+#define SEGMENT_E   _BV(5)
+#define SEGMENT_F   _BV(7)
+#define SEGMENT_G   _BV(2)
+#define SEGMENT_DP  _BV(3)
+
+/*
+ *   /===a===\
+ *  ||       ||
+ *  f        b
+ *  ||       ||
+ *   |===g===|
+ *  ||       ||
+ *  e        c
+ *  ||       ||  dp
+ *   \===d===/   *
+ */
+
+//#define MODE_SEGMENTS_PROBE
 
 #define ALARM_PIN (_BV(4))
 
@@ -39,6 +63,9 @@ enum State {
     STATE_FINISHED,
     STATE_EDIT_PLUS,
     STATE_EDIT_MINUS,
+#ifdef MODE_SEGMENTS_PROBE
+    STATE_SEGMENTS_PROBE,
+#endif
 
     STATE_NUM,
 };
@@ -76,3 +103,7 @@ void MainLoop();
 void OnPrinterTick(uint8_t cnt);
 void GoSleep();
 void SetAlarm(bool on);
+
+#ifdef MODE_SEGMENTS_PROBE
+void PrintSegment(uint8_t g_probedSegment);
+#endif

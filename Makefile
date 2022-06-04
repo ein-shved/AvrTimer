@@ -12,10 +12,15 @@ SRCS= sources/main.c    \
       sources/printer.c \
       sources/button.c
 
+
 OBJS = $(SRCS:.c=.o)
 MCU=atmega8
 CFLAGS = -mmcu=$(MCU) -Wall -g -Os -Werror -lm  -mcall-prologues -DF_CPU=1000000UL
 LDFLAGS = -mmcu=$(MCU) -Wall -g -Os  -Werror
+
+ifeq ($(SEGMENTS_PROBE),y)
+CFLAGS += -DMODE_SEGMENTS_PROBE
+endif
 
 all: $(TARG)
 

@@ -25,6 +25,12 @@ static void Edit_OnEnter();
 static void Edit_OnTick();
 static void Edit_OnButton(enum Button btn, enum ButtonAction action);
 
+#ifdef MODE_SEGMENTS_PROBE
+static void ProbeSegment_OnEnter();
+static void ProbeSegment_OnTick();
+static void ProbeSegment_OnButton(enum Button btn, enum ButtonAction action);
+#endif
+
 static struct Fsm {
     OnTick_f onTick;
     OnButton_f onButton;
@@ -55,6 +61,13 @@ static struct Fsm {
         .onButton = Edit_OnButton,
         .onEnter = Edit_OnEnter,
     },
+#ifdef MODE_SEGMENTS_PROBE
+    [STATE_SEGMENTS_PROBE] = {
+        .onTick = ProbeSegment_OnTick,
+        .onButton = ProbeSegment_OnButton,
+        .onEnter = ProbeSegment_OnEnter,
+    },
+#endif
 };
 
 static uint16_t g_Timeout = DEFAULT_TIMEOUT;
@@ -94,7 +107,12 @@ void PrepareFsm()
         g_Timeout = DEFAULT_TIMEOUT;
         SaveEeprom();
     }
+#ifdef MODE_SEGMENTS_PROBE
+    ToState(STATE_SEGMENTS_PROBE);
+#else
     ToState(STATE_IDLE);
+#endif
+
 }
 
 void SetAlarm(bool on)
@@ -303,3 +321,22 @@ static void Edit_OnButton(enum Button btn, enum ButtonAction action)
         ToState(STATE_IDLE);
     }
 }
+
+#ifdef MODE_SEGMENTS_PROBE
+static uint8_t g_probedSegment = 0;
+static void ProbeSegment_OnEnter()
+{
+    g_probedSegment = 0;
+    PrintSegment(g_probedSegment);
+}
+
+static void ProbeSegment_OnTick()
+{
+}
+
+static void ProbeSegment_OnButton(enum Button btn, enum ButtonAction action)
+{
+    g_probedSegment = (g_probedSegment + 1) % 8;
+    PrintSegment(g_probedSegment);
+}
+#endif
