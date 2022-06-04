@@ -1,8 +1,9 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define NOTIFY_THREASHOLD 5
-#define DEFAULT_TIMEOUT 10
+#define DEFAULT_TIMEOUT 120
+#define NOTIFY_THREASHOLD 10
+
 #define SECOND_DIVIDER 10
 #define FINISHED_STATE_TIMEOUT 2
 #define MSECS_PER_SEC 1000
