@@ -62,6 +62,12 @@ static inline uint8_t GetDigit(uint8_t num)
     return Digits[num % sizeof(Digits)];
 }
 
+static void HideNumber()
+{
+    PORTB = 0x0;
+    PORTC = CHARACTER_NONE;
+}
+
 static void PrintNumber(uint16_t num, uint8_t cnt)
 {
     cnt = cnt % 3;
@@ -75,15 +81,9 @@ static void PrintNumber(uint16_t num, uint8_t cnt)
     }
     num = GetDigit(num % 10);
 
-    PORTC = CHARACTER_NONE;
-    PORTB = num;
+    HideNumber();
     PORTC = character;
-}
-
-static void HideNumber()
-{
-    PORTC = CHARACTER_NONE;
-    PORTB = 0x0;
+    PORTB = num;
 }
 
 void PreparePrinter()
